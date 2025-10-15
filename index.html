@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amit Bhardwaj — Bio</title>
+  <meta name="description" content="A colorful, attractive one-page bio for Amit Bhardwaj."/>
+  <meta name="theme-color" content="#7c3aed"/>
+  <style>
+    :root{
+      --bg1:#0f1020;
+      --bg2:#1b1c3a;
+      --card:#ffffff10;
+      --text:#e6e6f0;
+      --accent:#7c3aed;     /* violet */
+      --accent-2:#22d3ee;   /* cyan  */
+      --good:#22c55e;
+      --muted:#c3c6d1;
+      --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
+      --radius: 22px;
+    }
+    /* --- Animations --- */
+    @keyframes button-glow {
+        0% { box-shadow: inset 0 0 0 1px #2c2e55, 0 10px 20px rgba(0,0,0,.35); }
+        50% { box-shadow: 0 0 10px var(--accent), inset 0 0 0 1px var(--accent-2), 0 10px 20px rgba(0,0,0,.35); }
+        100% { box-shadow: inset 0 0 0 1px #2c2e55, 0 10px 20px rgba(0,0,0,.35); }
+    }
+    @keyframes badge-appear {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes card-appear {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    /* ------------------ */
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 10% -10%, #3b82f640, transparent 60%),
+                  radial-gradient(900px 500px at 110% 10%, #a855f740, transparent 60%),
+                  linear-gradient(120deg, var(--bg1), var(--bg2));
+      background-attachment: fixed;
+      line-height:1.6;
+    }
+    .container{
+      max-width: 980px;
+      margin: 20px auto 64px;
+      padding: 0 20px;
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px; margin:16px 0 6px;
+      background:var(--card); border-radius: calc(var(--radius) - 8px);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      /* Animation: Nav bar */
+      opacity: 0; 
+      animation: card-appear 0.5s ease-out forwards 0s;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background:linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#0b1020; font-weight:700; letter-spacing:.2px;
+      box-shadow: 0 8px 24px rgba(124,58,237,.35);
+    }
+    .theme{
+      display:flex; align-items:center; gap:8px;
+    }
+    .switch{
+      width:50px;height:28px;border-radius:999px; position:relative; cursor:pointer;
+      background:#2a2b4a; box-shadow: inset 0 0 0 2px rgba(255,255,255,.06);
+    }
+    .dot{
+      position:absolute; top:3px; left:3px; width:22px; height:22px; border-radius:50%;
+      background:#fff; transition: all .25s ease;
+      box-shadow: 0 6px 12px rgba(0,0,0,.35);
+    }
+    body.light{
+      --bg1:#f7f7fb;
+      --bg2:#eaeaf4;
+      --card:#ffffffcc;
+      --text:#1f2430;
+      --muted:#60657a;
+      background: radial-gradient(1200px 600px at -10% 10%, #a78bfa33, transparent 60%),
+                  radial-gradient(900px 500px at 110% -10%, #22d3ee33, transparent 60%),
+                  linear-gradient(120deg, var(--bg1), var(--bg2));
+    }
+    body.light .dot{ left:25px; background:#0b1020 }
+
+    /* HERO SECTION MODIFICATIONS */
+    .hero{
+      display: block; 
+      padding:22px; margin-top:10px;
+      background:var(--card); border-radius: var(--radius);
+      backdrop-filter: blur(10px); box-shadow: var(--shadow);
+      /* Animation: Hero section */
+      opacity: 0; 
+      animation: card-appear 0.5s ease-out forwards 0.2s;
+    }
+    .hero-details {
+        display: flex;
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+    h1{
+      margin:0; font-size: clamp(28px, 3vw, 46px);
+      line-height:1.15; letter-spacing:.3px;
+      text-align: left;
+    }
+    .subtitle{
+        margin:.25rem 0 10px;
+        color:var(--muted);
+        text-align: left;
+        display: none; 
+    }
+    
+    .img-and-info {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start; 
+        width: 100%;
+        margin-top: 15px; 
+    }
+    
+    .avatar{
+      width:120px; height:120px; border-radius:28px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 16px 40px rgba(34,211,238,.25);
+      flex-shrink: 0;
+    }
+    
+    .badges-container {
+        display: flex;
+        flex-direction: column; 
+        gap: 10px;
+        flex-grow: 1;
+    }
+    
+    .badges{
+        display: block; 
+        margin: 0;
+    }
+    
+    /* Badge Animation */
+    .badge{
+      display: inline-block; 
+      width: auto;
+      padding:8px 12px; border-radius:999px; background:#ffffff14; border:1px solid #ffffff21;
+      font-weight:600; font-size:14px; letter-spacing:.2px;
+      margin-bottom: 10px; 
+      /* Apply animation for appearing */
+      opacity: 0;
+      animation: badge-appear 0.6s ease-out forwards;
+    }
+    /* Staggering the animation for each badge */
+    .badges-container .badge:nth-child(1) { animation-delay: 0.3s; }
+    .badges-container .badge:nth-child(2) { animation-delay: 0.4s; }
+    .badges-container .badge:nth-child(3) { animation-delay: 0.5s; }
+
+    /* CTA (Call/Email) Buttons */
+    .cta{
+      display:flex; gap:20px; flex-wrap:wrap; 
+      margin-top: 20px; 
+      width: 100%; 
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content: center; 
+      gap:8px; padding:12px 14px; border-radius:16px; text-decoration:none;
+      /* Dark/Berang Style */
+      background:linear-gradient(180deg, #121327, #0c0d1e); 
+      color:#e8eafd;
+      box-shadow: inset 0 0 0 1px #2c2e55, 0 10px 20px rgba(0,0,0,.35);
+      
+      transition: transform .12s ease, box-shadow .3s ease; /* transition added for glow smoothness */
+      flex-grow: 1; 
+    }
+    /* Button Glow Effect on Hover */
+    .btn:hover{ 
+        transform: scale(1.02); /* Slight scale up */
+        animation: button-glow 1.5s infinite alternate; /* Glow animation */
+        filter: brightness(1.1);
+    }
+    /* END HERO SECTION MODIFICATIONS */
+
+    .grid{
+      display:grid; grid-template-columns: repeat(12, 1fr); gap:18px; margin-top:18px;
+    }
+    .card{
+      grid-column: span 12;
+      background:var(--card); border-radius: var(--radius);
+      padding:18px 18px 20px; box-shadow: var(--shadow); backdrop-filter: blur(10px);
+      /* New Card Animation */
+      opacity: 0;
+      animation: card-appear 0.6s ease-out forwards;
+    }
+    /* Card Staggering (Delay) */
+    .grid .card:nth-child(1) { animation-delay: 0.4s; } 
+    .grid .card:nth-child(2) { animation-delay: 0.5s; } 
+    .grid .card:nth-child(3) { animation-delay: 0.6s; } 
+    .grid .card:nth-child(4) { animation-delay: 0.7s; }
+
+    @media (min-width: 760px){
+      .col-6{ grid-column: span 6 }
+      .col-4{ grid-column: span 4 }
+      .col-8{ grid-column: span 8 }
+    }
+    .card h2{ margin:0 0 10px; font-size:22px }
+    .row{ display:grid; grid-template-columns: 160px 1fr; gap:8px; padding:10px 0; border-bottom:1px dashed #ffffff2a }
+    .row:last-child{ border-bottom: 0 }
+    .row strong{ color:var(--muted) }
+    .emoji{ font-size:22px }
+    .footer{
+      text-align:center; color:var(--muted); margin-top:28px; font-size:14px
+    }
+    .school{
+      display:flex; gap:12px; align-items:flex-start; padding:10px 0
+    }
+    .school .mark{ font-size:20px }
+
+    /* Highlight List Item Animation */
+    .card ul li {
+        opacity: 0;
+        animation: badge-appear 0.5s ease-out forwards;
+    }
+    .card ul li:nth-child(1) { animation-delay: 0.8s; } 
+    .card ul li:nth-child(2) { animation-delay: 0.9s; }
+    .card ul li:nth-child(3) { animation-delay: 1.0s; }
+    
+    @media print{
+      body{ background:#fff; color:#000 }
+      .nav, .theme, .cta{ display:none }
+      .card, .hero{ box-shadow:none; background:#fff }
+      a::after{ content: " (" attr(href) ")"; font-size:12px; color:#555 }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <span class="chip">⚡ Bio ❌ Janamkunadli ✅</span>
+      <div class="theme">
+        <span title="Toggle theme" class="emoji">🌗</span>
+        <div class="switch" role="switch" aria-label="Toggle light mode" tabindex="0">
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-details">
+        <h1>🙌 Hi, I'm <span style="color:var(--accent-2)">Amit Bhardwaj</span></h1>
+        
+        <div class="img-and-info">
+            <div class="avatar" style="background-image: url('https://i.postimg.cc/6q9hVsjZ/Screenshot-2025-10-15-23-24-17-08-99c04817c0de5652397fc8b56c3b3817.jpg')" aria-hidden="true"></div>
+            
+            <div class="badges-container">
+                <span class="badge">📚 Class 11th </span>
+                <span class="badge">🎯 Science Student</span>
+                <span class="badge">🌟 Thoda cazual </span>
+            </div>
+        </div>
+        
+        <div class="cta">
+          <a class="btn" href="tel:+916398326132">📞 Call</a>
+          <a class="btn" href="mailto:amitk6398ak@gmail.com">✉️ Email</a> 
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card col-6">
+        <h2>👤 Basic Info</h2>
+        <div class="row"><strong>Name</strong><div>Amit Bhardwaj</div></div>
+        <div class="row"><strong>Date of Birth</strong><div>07/09/2009</div></div>
+        <div class="row"><strong>Father's Name</strong><div>Mr. Dinesh Kumar</div></div>
+        <div class="row"><strong>Mother's Name</strong><div>Mrs. Rajni Devi</div></div>
+      </article>
+
+      <article class="card col-6">
+        <h2>🏫 School</h2>
+        <div class="school">
+          <div class="mark">🏫</div>
+          <div>
+            <div><strong>Shri Nawab Singh Memorial Inter College</strong></div>
+            <div>Garhi Hariya, Sadabad, Hathras</div>
+          </div>
+        </div>
+        <div class="row"><strong>Current Class</strong><div>11th</div></div>
+      </article>
+
+      <article class="card col-8">
+        <h2>📬 Contact</h2>
+        <div class="row"><strong>Mobile</strong><div><a href="tel:+916398326132" style="color:inherit; text-decoration:none">+91 63983 26132</a></div></div>
+        <div class="row"><strong>Email</strong><div><a href="mailto:amitk6398ak@gmail.com" style="color:inherit; text-decoration:none">amitk6398ak@gmail.com</a></div></div>
+      </article>
+
+      <article class="card col-4">
+        <h2>💡 Quick Highlights</h2>
+        <ul style="margin:0; padding-left:18px">
+          <li>📖 Loves learning new things</li>
+          <li>🧠 Growth mindset</li>
+          <li>🚀 Ready for opportunities</li>
+        </ul>
+      </article>
+    </section>
+
+    <p class="footer">© <span id="year"></span> Amit Bhardwaj • Crafted with 💜</p>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle with localStorage
+    const $switch = document.querySelector('.switch');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const stored = localStorage.getItem('amit-theme');
+    if((stored && stored==='light') || (!stored && prefersLight)) document.body.classList.add('light');
+    $switch.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('amit-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+    $switch.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); $switch.click(); }
+    });
+  </script>
+</body>
+</html>
